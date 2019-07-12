@@ -1,20 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import Main from '../../Main'
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage'
-import userService from '../../utils/userService';
+// import userService from '../../utils/userService';
 
 
-class App extends Component {
-    constructor() {
-        super();
-        this.state = {
 
-        };
-        user: userService.getUser()
-    }
+
+export default function App () {
+    return(
+        <div>
+            <Router>
+                <Switch>
+                    <Route exact path="/" render={() => <LoginPage />} />
+                    <Route path="/signup" render={() => <SignupPage />} />
+
+                    <Main />
+                </Switch>
+            </Router>
+
+        </div>
+    )
 }
-
-export default App
