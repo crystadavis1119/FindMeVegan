@@ -3,7 +3,7 @@ import './App.css';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import Main from '../../Main'
 import SignupPage from '../SignupPage/SignupPage';
-import LoginPage from '../LoginPage/LoginPage'
+// import LoginPage from '../LoginPage/LoginPage'
 import userService from '../../utils/userService';
 
 
@@ -32,7 +32,7 @@ export default class App extends Component {
                 <Router>
                     <Switch>
                         {/* <Route exact path="/" render={() => <LoginPage />} /> */}
-                        <Route path="/" render={() => <SignupPage />} />
+                        <Route path="/" render={props => <SignupPage handleSignupOrLogin={this.handleSignupOrLogin} {...props}/>} />
                         <Main />
                     </Switch>
                 </Router>
