@@ -24,7 +24,8 @@
     "start": "npm start server.js",
     "start-dev": "concurrently \"npm run start-server\" \"cd ./client && npm start\"",
     "start-server": "nodemon server.js",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "build": "cd ./client && npm run build && mv build ../"
   },
   "eslintConfig": {
     "extends": "react-app"
