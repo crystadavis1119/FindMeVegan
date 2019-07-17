@@ -19,6 +19,7 @@
     "morgan": "^1.9.1",
     "nodemon": "^1.19.1",
     "react": "^16.8.6",
+    "react-animated-css": "^1.2.1",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",

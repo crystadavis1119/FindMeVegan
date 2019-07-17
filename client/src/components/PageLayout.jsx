@@ -12,22 +12,8 @@ import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import Chip from '@material-ui/core/Chip';
 import { Link } from 'react-router-dom';
-// import Link from '@material-ui/core/Link';
-// import AppBar from '@material-ui/core/AppBar';
-// import CameraIcon from '@material-ui/icons/PhotoCamera';
-// import Toolbar from '@material-ui/core/Toolbar';
+import { Animated } from 'react-animated-css';
 
-// function MadeWithLove() {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="center">
-//       {'Built with love by the '}
-//       <Link color="inherit" href="https://material-ui.com/">
-//         Material-UI
-//       </Link>
-//       {' team.'}
-//     </Typography>
-//   );
-// }
 const styles = theme => ({
   icon: {
     marginRight: theme.spacing(2),
@@ -57,7 +43,23 @@ const styles = theme => ({
   chip: {
     marginRight: 4,
     marginBottom: 4
-  }
+  },
+  landingPage: {
+    justifyContent: 'center',
+    textAlign: 'center',
+    fontSize: '20vh',
+    fontFamily: 'Permanent Marker',
+    margin: '0 auto',
+    color: '#824A79'
+  },
+  landingPage2: {
+    justifyContent: 'center',
+    textAlign: 'center',
+    fontSize: '20vh',
+    fontFamily: 'Permanent Marker',
+    margin: '0 auto',
+    color: '#93A388'
+  },
 });
 
 class PageLayout extends Component {
@@ -102,6 +104,20 @@ class PageLayout extends Component {
     return (
       <React.Fragment>
         <CssBaseline />
+        {!auth && (
+          <div>
+          <Animated animationIn="fadeInDown" animationOut="fadeOut" isVisible={true}>
+            <p className={classes.landingPage}>
+              Powered by
+            </p>
+          </Animated>
+          <Animated animationIn="pulse" animationOut="fadeOut" isVisible={true}>
+            <p className={classes.landingPage2}>
+              Compassion
+            </p>
+          </Animated>
+          </div>
+        )}
         {auth && (
           <main>
             {/* Hero unit */}
