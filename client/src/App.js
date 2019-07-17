@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Restaurant from './pages/Restaurant';
 import tokenService from './utils/tokenService';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
@@ -17,9 +18,10 @@ function App() {
     <div>
       <Router>
         <TopBar auth={auth} handleLogout={handleLogout} />
-        <PageLayout auth={auth} />
+        <Route exact path="/" render={() =>  <PageLayout auth={auth} />} />
         <Route exact path="/signup" render={() => <SignUp handleLogin={handleLogin} />} />
         <Route exact path="/login" render={() => <Login handleLogin={handleLogin} />} />
+        <Route exact path="/restaurant/:id" component={Restaurant} />
       </Router>
     </div>
   );

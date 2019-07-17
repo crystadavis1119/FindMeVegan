@@ -63,7 +63,7 @@ export default function TopBar({ auth, handleLogout }) {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <AccountCircle />
+              <AccountCircle />
               </IconButton>
               <Menu
                 id="menu-appbar"

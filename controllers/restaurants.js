@@ -3,11 +3,25 @@ const apiKey = process.env.Yelp_API_Key;
 
 module.exports = {
   index,
-  search
+  search,
+  restaurantInfo
 };
 
 let cache = {}
 
+async function restaurantInfo(req, res) {
+  const { id } = req.params;
+  try {
+    const { data } = await axios.get(`https://api.yelp.com/v3/businesses/${id}`, { 
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+      },
+    })
+    return res.json(data)
+  } catch (e) {
+    res.status(400).json(e);
+  }
+}
 
 async function index(req, res) {
   if (cache.index) {

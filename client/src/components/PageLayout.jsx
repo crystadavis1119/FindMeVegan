@@ -11,6 +11,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import Chip from '@material-ui/core/Chip';
+import { Link } from 'react-router-dom';
 // import Link from '@material-ui/core/Link';
 // import AppBar from '@material-ui/core/AppBar';
 // import CameraIcon from '@material-ui/icons/PhotoCamera';
@@ -82,6 +83,18 @@ class PageLayout extends Component {
     search: e.target.value
   });
 
+  async getResults() {
+    const { search } = this.state;
+    const res = await fetch(`${this.BASE_RESTAURANTS_URL}/search?term=${search}`);
+    const restaurants = await res.json() 
+    return restaurants;
+  }
+
+  onSubmitSearch = async () => {
+    const restaurants = await this.getResults()
+    this.setState({ restaurants })
+  }
+
   render() {
     const { auth, classes } = this.props
     const { restaurants, search } = this.state;
@@ -117,7 +130,7 @@ class PageLayout extends Component {
                 <div className={classes.heroButtons}>
                   <Grid container spacing={2} justify="center">
                     <Grid item>
-                      <Button variant="contained" color="primary">
+                      <Button variant="contained" color="primary" onClick={this.onSubmitSearch}>
                         Let's Go!
                       </Button>
                     </Grid>
@@ -129,7 +142,7 @@ class PageLayout extends Component {
               {/* End hero unit */}
               <Grid container spacing={4}>
                 {restaurants.map(restaurant => (
-                  <Grid item xs={12} sm={6} md={4}>
+                  <Grid key={restaurant.name} item xs={12} sm={6} md={4}>
                     <Card className={classes.card}>
                       <CardMedia
                         className={classes.cardMedia}
@@ -143,13 +156,13 @@ class PageLayout extends Component {
                         <Typography>
                           {restaurant.location.display_address[0]}
                         </Typography>
-                          <hr />
-                          {restaurant.categories.map(category => (
-                            <Chip label={category.title} className={classes.chip} />
-                          ))}
+                        <hr />
+                        {restaurant.categories.map(category => (
+                          <Chip key={category.title} label={category.title} className={classes.chip} />
+                        ))}
                       </CardContent>
                       <CardActions>
-                        <Button size="small" color="primary">
+                        <Button to={`/restaurant/${restaurant.id}`} component={Link} size="small" color="primary">
                           View
                         </Button>
                       </CardActions>
