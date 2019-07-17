@@ -9,6 +9,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+
 const styles = theme => ({
   container: {
     display: 'flex',
@@ -51,6 +52,17 @@ class Restaurant extends Component {
     const restaurant = await response.json();
     this.setState({ restaurant });
   }
+  
+
+  dayMap = {
+    1: 'Mon',
+    2: 'Tue',
+    3: 'Wed',
+    4: 'Thu',
+    5: 'Fri',
+    6: 'Sat',
+    7: 'Sun'
+  }
 
   render() {
     const { restaurant } = this.state;
@@ -58,7 +70,8 @@ class Restaurant extends Component {
 
     if (!restaurant) return <div>Loading</div>;
     console.log(restaurant);
-
+    
+    const regularHours = restaurant.hours[0].open;
 
     return (
       <div>
@@ -107,7 +120,11 @@ class Restaurant extends Component {
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               <Typography>
-                {restaurant.hours.open}
+                {regularHours.map(hourObj => (
+                  <div>
+                    {this.dayMap[hourObj.day]}: {hourObj.start}-{hourObj.end}
+                  </div>
+                ))}
               </Typography>
             </ExpansionPanelDetails>
           </ExpansionPanel>
